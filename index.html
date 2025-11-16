@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INPONOR en crisis: Abandono del MINERD | La Voz del Centro</title>
+    <!-- Fuentes profesionales como Listín Diario y reportajes de El País / The New York Times -->
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red-primary: #c8102e;
+            --dark: #1a1a1a;
+            --gray: #555;
+            --light-gray: #f8f8f8;
+            --border: #e0e0e0;
+            --accent-blue: #0d47a1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fff;
+            color: var(--dark);
+            line-height: 1.7;
+            font-size: 17px;
+        }
+
+        /* === LAYOUT DE DIARIO PROFESIONAL: 3 COLUMNAS (Sidebar Izq | Centro | Sidebar Der) === */
+        .newspaper-layout {
+            display: grid;
+            grid-template-columns: 240px 1fr 240px;
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        @media (max-width: 1024px) {
+            .newspaper-layout {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .sidebar-left, .sidebar-right {
+                display: none;
+            }
+        }
+
+        /* === HEADER === */
+        .header {
+            grid-column: 1 / -1;
+            background: #fff;
+            border-bottom: 6px solid var(--red-primary);
+            padding: 18px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--red-primary);
+            letter-spacing: -1.5px;
+        }
+
+        .logo span {
+            color: #000;
+            font-weight: 400;
+        }
+
+        .edition {
+            font-size: 0.95rem;
+            color: #777;
+            font-weight: 500;
+        }
+
+        .edition strong {
+            color: var(--red-primary);
+        }
+
+        /* === SIDEBAR IZQUIERDO (Anuncios / Navegación) === */
+        .sidebar-left {
+            background: var(--light-gray);
+            padding: 20px;
+            border-radius: 8px;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .nav-menu h3 {
+            font-size: 1.1rem;
+            color: var(--red-primary);
+            margin-bottom: 15px;
+            font-weight: 600;
+            border-bottom: 2px solid var(--red-primary);
+            padding-bottom: 6px;
+        }
+
+        .nav-menu ul {
+            list-style: none;
+        }
+
+        .nav-menu li {
+            margin-bottom: 10px;
+        }
+
+        .nav-menu a {
+            color: #333;
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: block;
+            padding: 6px 0;
+            transition: color 0.2s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--red-primary);
+        }
+
+        .ad-sidebar {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: center;
+            margin-top: 25px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .ad-sidebar img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        /* === CONTENIDO CENTRAL === */
+        .main-content {
+            background: #fff;
+            padding: 0;
+        }
+
+        /* Título principal */
+        .article-title {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2.8rem;
+            line-height: 1.15;
+            color: #000;
+            margin-bottom: 14px;
+            font-weight: 700;
+        }
+
+        .article-subtitle {
+            font-size: 1.35rem;
+            color: var(--gray);
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .byline {
+            font-style: italic;
+            color: #444;
+            margin: 16px 0 8px;
+            font-size: 1.1rem;
+        }
+
+        .publish-info {
+            color: #888;
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+        }
+
+        .publish-info span {
+            margin-right: 15px;
+        }
+
+        /* Imagen destacada */
+        .featured-img {
+            width: 100%;
+            height: auto;
+            max-height: 520px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 28px 0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .img-caption {
+            font-size: 0.92rem;
+            color: #666;
+            font-style: italic;
+            text-align: center;
+            margin: 12px 0 35px;
+            line-height: 1.5;
+        }
+
+        .img-caption strong {
+            color: #000;
+        }
+
+        /* Cuerpo del artículo */
+        .article-body {
+            font-size: 1.15rem;
+            line-height: 1.85;
+            text-align: justify;
+            margin-bottom: 40px;
+        }
+
+        .article-body p {
+            margin-bottom: 1.5rem;
+        }
+
+        .section-header {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.9rem;
+            color: var(--red-primary);
+            margin: 50px 0 22px;
+            padding-left: 14px;
+            border-left: 6px solid var(--red-primary);
+            font-weight: 700;
+        }
+
+        /* Citas destacadas */
+        .pull-quote {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.75rem;
+            line-height: 1.35;
+            color: var(--red-primary);
+            text-align: center;
+            margin: 45px auto;
+            padding: 28px 20px;
+            max-width: 85%;
+            border-top: 4px solid var(--red-primary);
+            border-bottom: 4px solid var(--red-primary);
+            font-style: italic;
+            font-weight: 600;
+        }
+
+        .quote-block {
+            background: #fafafa;
+            border-left: 6px solid var(--red-primary);
+            padding: 22px 28px;
+            margin: 35px 0;
+            font-style: italic;
+            font-size: 1.2rem;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+
+        .quote-block cite {
+            display: block;
+            margin-top: 15px;
+            font-weight: 600;
+            color: var(--red-primary);
+            font-style: normal;
+            font-size: 1rem;
+        }
+
+        /* === SIDEBAR DERECHO (Anuncios + Relacionados) === */
+        .sidebar-right {
+            background: var(--light-gray);
+            padding: 20px;
+            border-radius: 8px;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .related-news h3, .ad-right h3 {
+            font-size: 1.1rem;
+            color: var(--red-primary);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--red-primary);
+            padding-bottom: 6px;
+        }
+
+        .related-item {
+            display: flex;
+            margin-bottom: 18px;
+            font-size: 0.95rem;
+        }
+
+        .related-item img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-right: 12px;
+        }
+
+        .related-item h4 {
+            font-size: 1rem;
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+
+        .related-item h4 a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        .related-item h4 a:hover {
+            color: var(--red-primary);
+        }
+
+        .related-item p {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .ad-right {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .ad-right .ad-box {
+            background: #fff;
+            border: 1px dashed #ccc;
+            padding: 20px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        /* === FOOTER === */
+        .footer {
+            grid-column: 1 / -1;
+            background: #111;
+            color: #ccc;
+            padding: 40px 20px 30px;
+            margin-top: 80px;
+            font-size: 0.9rem;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-col h4 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col a {
+            color: #aaa;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .footer-col a:hover {
+            color: var(--red-primary);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #777;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LAYOUT TIPO DIARIO -->
+    <div class="newspaper-layout">
+
+        <!-- HEADER -->
+        <header class="header">
+            <div class="header-container">
+                <a href="#" class="logo">LA VOZ<span>DEL CENTRO</span></a>
+                <div class="edition">Edición Digital | <strong>Martes 4 de noviembre de 2025</strong></div>
+            </div>
+        </header>
+
+        <!-- SIDEBAR IZQUIERDO -->
+        <aside class="sidebar-left">
+            <div class="nav-menu">
+                <h3>Secciones</h3>
+                <ul>
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Provincia</a></li>
+                    <li><a href="#">Educación</a></li>
+                    <li><a href="#">Salud</a></li>
+                    <li><a href="#">Deportes</a></li>
+                    <li><a href="#">Cultura</a></li>
+                </ul>
+            </div>
+            <div class="ad-sidebar">
+                <img src="anuncio1.jpg" alt="Anuncio">
+                <p><strong>Espacio Publicitario</strong><br>Contáctanos: Lacozdelpueblo@gmail.com</p>
+            </div>
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="main-content">
+            <article>
+                <h1 class="article-title">INPONOR en crisis: Abandono del MINERD deja sin futuro a cientos de jóvenes técnicos en Valverde</h1>
+                <p class="article-subtitle">Docentes y estudiantes denuncian equipos dañados, talleres obsoletos y promesas incumplidas de la Regional 09</p>
+                <p class="byline">Por: Redacción La Voz del Centro</p>
+                <p class="publish-info">
+                    <span>Publicado: 28 de octubre de 2025</span>
+                    <span>3:05 PM</span>
+                    <span>Mao, Valverde</span>
+                </p>
+
+                <!-- IMAGEN DESTACADA -->
+                <img src="inponor entrada.jpg" alt="Fachada del INPONOR" class="featured-img">
+                <p class="img-caption"><strong>Fachada del Instituto Politécnico del Noroeste (INPONOR).</strong> Un símbolo de formación técnica que hoy lucha por sobrevivir ante el abandono institucional. (Foto: La Voz del Centro)</p>
+
+                <!-- INTRO -->
+                <div class="article-body">
+                    <p>El <strong>Instituto Politécnico del Noroeste (INPONOR)</strong>, ubicado en Mao, provincia Valverde, enfrenta una difícil situación por la falta de atención y gestión del <strong>Ministerio de Educación (MINERD)</strong> y su <strong>Regional 09</strong>. La carencia de equipos, la desactualización de los talleres y los procesos administrativos lentos están afectando directamente la calidad de la educación técnica y el futuro de los jóvenes que aspiran a desarrollarse profesionalmente.</p>
+
+                    <p>En el corazón de la provincia Valverde, el INPONOR ha sido durante años un símbolo de formación y progreso para los jóvenes interesados en carreras técnicas. Sin embargo, la realidad actual muestra un panorama desalentador: la irresponsabilidad del MINERD y la ineficiencia de la Regional 09 han dejado al centro educativo en un estado de abandono progresivo.</p>
+                </div>
+
+                <!-- SECCIÓN 1 -->
+                <h2 class="section-header">Docentes frustrados ante el abandono</h2>
+                <div class="article-body">
+                    <p>El profesor <strong>Ramón Cabrera</strong>, del área técnica de Informática, explica que la carrera sigue avanzando gracias al esfuerzo de los docentes, pero <em>sin equipos actualizados es imposible ofrecer una educación de calidad</em>. Según comenta, los recursos prometidos por el Ministerio nunca llegan, y muchos equipos permanecen dañados desde hace meses sin recibir mantenimiento ni reposición.</p>
+
+                    <div class="quote-block">
+                        “La carrera sigue avanzando gracias al esfuerzo de los docentes, pero sin equipos actualizados es imposible ofrecer una educación de calidad.”
+                        <cite>— Ramón Cabrera, profesor de Informática</cite>
+                    </div>
+
+                    <p>La profesora <strong>Rosa Serrata</strong> también manifestó su preocupación, señalando que los talleres están deteriorados y carecen de materiales suficientes para realizar prácticas. A pesar de los múltiples reclamos formales presentados, las autoridades competentes no han dado respuesta ni mostrado interés en resolver la situación.</p>
+                </div>
+
+                <div class="pull-quote">
+                    La falta de apoyo institucional está debilitando la confianza del personal docente.
+                </div>
+
+                <!-- SECCIÓN 2 -->
+                <h2 class="section-header">La voz del alumnado</h2>
+                <div class="article-body">
+                    <p>Los estudiantes, principales afectados, expresan su frustración ante el abandono institucional. <strong>Alexander Rodríguez</strong>, alumno del área técnica, comenta que <em>“queremos aprender haciendo, pero no tenemos herramientas. Es injusto que el Ministerio nos ignore mientras otros centros reciben apoyo constante”</em>.</p>
+
+                    <img src="aula vacia.jpg" alt="Aula deteriorada" class="featured-img">
+                    <p class="img-caption"><strong>Aula de informática del INPONOR.</strong> Computadoras dañadas, cables expuestos y falta de mantenimiento. Los estudiantes deben turnarse para practicar. (Foto: La Voz del Centro)</p>
+
+                    <div class="quote-block">
+                        “Queremos aprender haciendo, pero no tenemos herramientas. Es injusto que el Ministerio nos ignore.”
+                        <cite>— Alexander Rodríguez, estudiante</cite>
+                    </div>
+                </div>
+
+                <!-- MÁS SECCIONES -->
+                <h2 class="section-header">El reflejo del abandono en los talleres</h2>
+                <div class="article-body">
+                    <p>Los talleres del INPONOR son el reflejo más evidente del descuido institucional. En el área de Informática, muchas computadoras no funcionan correctamente, lo que obliga a los estudiantes a turnarse para poder realizar sus prácticas.</p>
+                    <p>A pesar de ello, tanto maestros como alumnos han buscado soluciones internas, reparando equipos con recursos propios. Sin embargo, estos esfuerzos locales no son suficientes para cubrir la falta de apoyo del MINERD.</p>
+                </div>
+
+                <h2 class="section-header">Causas y consecuencias</h2>
+                <div class="article-body">
+                    <p>Las principales causas: <strong>falta de inversión</strong>, <strong>burocracia</strong> y <strong>escasez de recursos</strong>. Consecuencias: aprendizaje comprometido, motivación en caída y deterioro progresivo de la calidad educativa.</p>
+                </div>
+
+                <h2 class="section-header">Un llamado urgente al MINERD</h2>
+                <div class="article-body">
+                    <p>Docentes y estudiantes exigen <strong>acciones concretas</strong>: mantenimiento, equipos nuevos y mejora de talleres. <strong>La Regional 09 y el MINERD deben actuar ya.</strong></p>
+                </div>
+
+                <h2 class="section-header">Reflexión final</h2>
+                <div class="article-body">
+                    <p>El caso del INPONOR es un reflejo de un problema estructural en la educación dominicana. <strong>La educación técnica debe ser prioridad nacional, no una promesa vacía.</strong></p>
+                    <div class="pull-quote">
+                        La voz del centro sigue viva, clamando por justicia y educación digna.
+                    </div>
+                </div>
+            </article>
+        </main>
+
+        <!-- SIDEBAR DERECHO -->
+        <aside class="sidebar-right">
+            <div class="related-news">
+                <h3>Más leídas</h3>
+                <div class="related-item">
+                    <img src="anuncio2.jpg" alt="">
+                    <div>
+                        <h4><a href="#">Alcaldía de Mao anuncia reparación de calles</a></h4>
+                        <p>Hace 2 horas</p>
+                    </div>
+                </div>
+                <div class="related-item">
+                    <img src="anuncio3.jpg" alt="">
+                    <div>
+                        <h4><a href="#">Hospital de Esperanza recibe nuevos equipos</a></h4>
+                        <p>Hace 5 horas</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ad-right">
+                <h3>Publicidad</h3>
+                <div class="ad-box">
+                    <img src="https://via.placeholder.com/200x200/eeeeee/999999?text=TU+MARCA+AQUÍ" alt="Anuncio">
+                    <p>Espacio en venta<br><strong>829-555-0192</strong></p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h4>La Voz del Centro</h4>
+                    <ul>
+                        <li><a href="#">Sobre nosotros</a></li>
+                        <li><a href="#">Equipo</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Secciones</h4>
+                    <ul>
+                        <li><a href="#">Provincia</a></li>
+                        <li><a href="#">Nacional</a></li>
+                        <li><a href="#">Deportes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Síguenos</h4>
+                    <ul>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">YouTube</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 <strong>La Voz del Centro</strong> | Todos los derechos reservados
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>
